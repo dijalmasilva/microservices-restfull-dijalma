@@ -1,0 +1,8 @@
+/rest-agencia/target/*
+/rest-agencia/.idea/*
+/rest-cliente/target/*
+/rest-cliente/.idea/*
+/rest-hotel/target/*
+/rest-hotel/.idea/*
+/rest-passagem/target/*
+/rest-passagem/.idea/*
