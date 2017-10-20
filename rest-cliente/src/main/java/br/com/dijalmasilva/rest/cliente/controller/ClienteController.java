@@ -49,7 +49,7 @@ public class ClienteController implements Serializable {
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<Cliente> editCliente(@PathVariable Long id, Cliente cliente) {
+    ResponseEntity<Cliente> editCliente(@PathVariable Long id, @RequestBody Cliente cliente) {
         Cliente edit = servicoCliente.editCliente(id, cliente);
 
         if (edit != null) {
