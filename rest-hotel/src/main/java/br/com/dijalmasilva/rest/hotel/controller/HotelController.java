@@ -14,6 +14,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/hotel")
+@CrossOrigin
 public class HotelController {
 
     @Autowired

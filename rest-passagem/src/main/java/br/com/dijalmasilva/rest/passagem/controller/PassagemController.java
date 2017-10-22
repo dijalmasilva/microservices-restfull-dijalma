@@ -14,6 +14,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/passagem")
+@CrossOrigin
 public class PassagemController {
 
     @Autowired
