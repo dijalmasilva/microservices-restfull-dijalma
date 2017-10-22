@@ -5,6 +5,7 @@ import br.com.dijalmasilva.rest.hotel.repository.ReservaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -17,6 +18,7 @@ public class ReservaService {
     private ReservaRepository dao;
 
     public Reserva save(Reserva reserva) {
+        reserva.setDiaDaCriacaoDaReserva(LocalDate.now().toString());
         return dao.save(reserva);
     }
 
