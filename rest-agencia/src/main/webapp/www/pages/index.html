@@ -2,11 +2,11 @@
 <html lang="pt-br" ng-app="agencia-app">
 <head>
     <meta charset="UTF-8">
-    <title>Hotel</title>
+    <title>Agência</title>
     <script src="/www/js/lib/angular.min.js"></script>
 </head>
 <body ng-controller="AgenciaController">
-<h1>Funcionalidades do hotel</h1>
+<h1>Funcionalidades da Agência</h1>
 <button type="button" ng-click="setTab(1)">Novo Pacote</button>
 <button type="button" ng-click="setTab(2)">Listar Pacotes</button>
 <div ng-show="compareTab(1)">
@@ -36,17 +36,18 @@
             </tbody>
         </table>
         <br>
-        <input type="text" placeholder="Hotel" ng-model="reserva.hotel.nome" disabled>
+        <input type="text" placeholder="Hotel" ng-model="reserva.hotel.nome">
         <input type="date" placeholder="Data da reserva" ng-model="reserva.dataReservada">
         <input type="text" placeholder="Cpf do cliente" ng-model="passagem.cpfCliente">
         <input type="text" placeholder="Cidade de origem" ng-model="passagem.cidadeOrigem">
-        <input type="text" placeholder="Cidade de destino" ng-model="passagem.cidadeDestino" disabled>
+        <input type="text" placeholder="Cidade de destino" ng-model="passagem.cidadeDestino">
         <input type="number" placeholder="Valor" ng-model="passagem.valor">
         <button type="submit" ng-click="salvarPacote()">Salvar</button>
         <button type="reset" ng-click="cancelar()">Cancelar</button>
     </form>
 </div>
 <div ng-show="compareTab(2)">
+    <br>
     <table border="1" cellpadding="10" align="center">
         <thead>
             <tr>
@@ -59,8 +60,8 @@
         <tbody>
             <tr ng-repeat="p in pacotes">
                 <td>{{p.reserva.hotel.nome}}</td>
-                <td>{{p.reserva.dataReservada|data:"dd/MM/yyyy"}}</td>
-                <td>{{p.passagem.cliente.nome}}</td>
+                <td>{{p.reserva.dataReservada|date:"dd/MM/yyyy"}}</td>
+                <td>{{p.cliente.nome}}</td>
                 <td>{{p.passagem.valor}}</td>
             </tr>
         </tbody>

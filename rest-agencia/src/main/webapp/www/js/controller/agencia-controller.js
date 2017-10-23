@@ -50,26 +50,18 @@ app.controller("AgenciaController", ["$scope", "AgenciaService", function ($scop
 
     $scope.listarPacotes = function () {
         AgenciaService.listarPacotes(function (res) {
-            console.log(res);
             if (res.data.length > 0) {
                 var cliente = {};
                 var passagem = {};
                 var reserva = {};
                 var pacote = {};
                 $scope.pacotes = [];
-                for (p in res.data) {
-                    AgenciaService.buscarPassagem(p.idPassagem, function (res) {
-                        passagem = res;
-                        AgenciaService.buscarReserva(p.idReserva, function (res) {
-                            reserva = res;
-                            AgenciaService.buscarCliente(reserva.cpfCliente, function (res) {
-                                cliente = res;
-                                pacote.cliente = cliente;
-                                pacote.passagem = passagem;
-                                pacote.reserva = reserva;
-                                $scope.pacotes.push(pacote);
-                            });
-                        })
+                var pacotes = res.data;
+                var p;
+                for (var i = 0; i < pacotes.length; i++) {
+                    p = pacotes[i];
+                    AgenciaService.buscaPacoteCompleto(p, function (res) {
+                        $scope.pacotes.push(res);
                     })
                 }
             }

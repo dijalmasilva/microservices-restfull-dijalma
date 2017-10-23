@@ -70,4 +70,18 @@ app.service("AgenciaService", ["$http", function ($http) {
             callback(res.data);
         });
     }
+
+    this.buscaPacoteCompleto = function (p, callback) {
+        var pacote = {};
+        $http.get(urlPassagem + "/" + p.idPassagem).then(function (res) {
+            pacote.passagem = res.data;
+            $http.get(urlReserva + "/" + p.idReserva).then(function (res) {
+                pacote.reserva = res.data;
+                $http.get(urlCliente + "/filter/cpf/" + pacote.reserva.cpfCliente).then(function (res) {
+                    pacote.cliente = res.data;
+                    callback(pacote);
+                });
+            });
+        });
+    }
 }]);
