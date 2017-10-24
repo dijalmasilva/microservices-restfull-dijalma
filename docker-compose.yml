@@ -1,0 +1,71 @@
+version: "2"
+services:
+  postgres-cliente:
+    container_name: postgres-cliente
+    build: ./rest-cliente/postgres
+    image: postgres-cliente
+    ports:
+      - "5434:5432"
+  cliente-api:
+    container_name: cliente-api
+    build: ./rest-cliente/
+    image: cliente-api
+    ports:
+      - "8081:8080"
+    links:
+      - "postgres-cliente:host-banco"
+
+  postgres-hotel:
+    container_name: postgres-hotel
+    build: ./rest-hotel/postgres
+    image: postgres-hotel
+    ports:
+      - "5435:5432"
+  hotel-api:
+    container_name: hotel-api
+    build: ./rest-hotel/
+    image: hotel-api
+    ports:
+      - "8082:8081"
+    links:
+      - "postgres-hotel:host-banco"
+      - "cliente-api:cliente-api"
+
+  postgres-passagem:
+    container_name: postgres-passagem
+    build: ./rest-passagem/postgres
+    image: postgres-passagem
+    ports:
+      - "5436:5432"
+  passagem-api:
+    container_name: passagem-api
+    build: ./rest-passagem/
+    image: passagem-api
+    ports:
+      - "8083:8082"
+    links:
+      - "postgres-passagem:host-banco"
+      - "cliente-api:cliente-api"
+
+  postgres-agencia:
+    container_name: postgres-agencia
+    build: ./rest-agencia/postgres
+    image: postgres-agencia
+    ports:
+      - "5437:5432"
+  agencia-api:
+    container_name: agencia-api
+    build: ./rest-agencia/
+    image: agencia-api
+    ports:
+      - "8084:8083"
+    links:
+      - "postgres-agencia:host-banco"
+      - "cliente-api:cliente-api"
+      - "hotel-api:hotel-api"
+      - "passagem-api:passagem-api"
+
+networks:
+  default:
+    external:
+      name: rest-pos
